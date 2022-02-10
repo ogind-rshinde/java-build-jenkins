@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage ('Test Junit') {
       steps {
-          sh './mvnw test'
+          bat './mvnw test'
       }
       
       post {
