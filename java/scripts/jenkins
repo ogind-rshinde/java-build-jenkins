@@ -9,7 +9,7 @@ pipeline {
       
       post {
         always {
-          junit 'pom.xml'
+          bat 'mvn test'
         }
       }
     }
