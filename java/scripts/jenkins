@@ -33,7 +33,7 @@ pipeline {
       stage('Move build by bat to directory') {
           steps {
               echo 'moving a build to another directory by bat'
-              bat 'xcopy target\\spring-petclinic-2.3.1.BUILD-SNAPSHOT.jar C:\\releases\\'
+              bat 'xcopy target\\spring-petclinic-2.3.1.BUILD-SNAPSHOT.jar C:\\releases\\ /Y'
           }
       }
       //stage('Move build') {
