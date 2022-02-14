@@ -34,7 +34,7 @@ pipeline {
           steps {
               echo 'moving a build to another directory'
               script{
-                sh 'cp target\\*.jar /c/releases/'
+                sh '/d/projects/buildmove.sh'
               }
           }
       }
