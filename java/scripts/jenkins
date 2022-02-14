@@ -36,14 +36,14 @@ pipeline {
               bat 'xcopy target\\spring-petclinic-2.3.1.BUILD-SNAPSHOT.jar C:\\releases\\'
           }
       }
-      #stage('Move build') {
-      #    steps {
-      #        echo 'moving a build to another directory'              
-      #        script{
-      #          sh '/d/projects/buildmove.sh'
-      #        }
-      #    }
-      #}
+      //stage('Move build') {
+      //    steps {
+      //        echo 'moving a build to another directory'              
+      //        script{
+      //          sh '/d/projects/buildmove.sh'
+      //        }
+      //    }
+      // }
       stage ('Java Build confirmation') {
         when {
               expression {
