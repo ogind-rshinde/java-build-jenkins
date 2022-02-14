@@ -30,6 +30,14 @@ pipeline {
               }
           }
       }
+      stage('Move build') {
+          steps {
+              echo 'moving a build to another directory'
+              script{
+                sh 'cp target\\*.jar /c/releases/'
+              }
+          }
+      }
       stage ('Java Build confirmation') {
         when {
               expression {
