@@ -2,30 +2,46 @@
 pipeline {
   agent any
   stages {
-    stage ('Test Junit') {
-      steps {
-          bat './mvnw test'
+    stage('Build') {
+          steps {
+              echo 'Executing Build'
+              bat 'mvn compile'
+          }
       }
-      
-      post {
-        always {
-          bat 'mvn test'
+      stage('Test') {
+          steps {
+              echo 'Git Checkout'
+              bat 'mvn test'
+          }
+      }
+      stage('Package') {
+          steps {
+              echo 'Executing Build'
+              bat 'mvn package'
+          }
+          post {
+              always {
+                  // One or more steps need to be included within each condition's block.
+                  junit 'target\\surefire-reports\\*.xml'
+              }
+              success {
+                  // One or more steps need to be included within each condition's block.
+                  archiveArtifacts artifacts: 'target\\*.jar', followSymlinks: false
+              }
+          }
+      }
+      stage ('Java Build confirmation') {
+        when {
+              expression {
+                  getCurrentBuildGitDetails()
+              }
+          }
+        steps {
+            echo "Java build has started."
         }
-      }
-    }
+      }   
 
-    stage ('Java Build confirmation') {
-      when {
-            expression {
-                getCurrentBuildGitDetails()
-            }
-        }
-      steps {
-          echo "Java build has started."
-      }
-    }   
-     
-  }
+    }
 }
 
 @NonCPS
