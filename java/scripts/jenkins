@@ -5,19 +5,19 @@ pipeline {
     stage('Build') {
           steps {
               echo 'Executing Build'
-              bat 'mvnw compile'
+              bat './mvnw compile'
           }
       }
       stage('Test') {
           steps {
               echo 'Git Checkout'
-              bat 'mvnw test'
+              bat './mvnw test'
           }
       }
       stage('Package') {
           steps {
               echo 'Executing Build'
-              bat 'mvnw package'
+              bat './mvnw package'
           }
           post {
               always {
