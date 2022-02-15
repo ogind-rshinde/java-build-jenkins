@@ -36,14 +36,6 @@ pipeline {
               bat 'xcopy target\\spring-petclinic-2.3.1.BUILD-SNAPSHOT.jar C:\\releases\\ /Y'
           }
       }
-      //stage('Move build') {
-      //    steps {
-      //        echo 'moving a build to another directory'              
-      //        script{
-      //          sh '/d/projects/buildmove.sh'
-      //        }
-      //    }
-      // }
       stage ('Java Build confirmation') {
         when {
               expression {
@@ -55,6 +47,16 @@ pipeline {
         }
       }   
 
+    }
+    post {
+        success {
+            script {
+                slackSend (channel: 'fin-java-build-notifications', color: "good", message: "Build Successful.\n Changes:\n ${env.GIT_COMMIT_MSG}" + "\n\n Check console output at: (${env.BUILD_URL})/console" + "\n")
+            }
+        }
+        failure {
+            slackSend (channel: 'fin-java-build-notifications', color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")      
+        }
     }
 }
 
