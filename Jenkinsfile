@@ -1,7 +1,7 @@
 pipeline {
     agent {
         node {
-          label 'php2j-dev001'
+          label 'dev001-agent'
         }
       }
 
