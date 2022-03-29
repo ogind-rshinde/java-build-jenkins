@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+        node {
+          label 'php2j-dev001'
+        }
+      }
 
     stages {
         stage('Build') {
